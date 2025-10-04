@@ -1,17 +1,40 @@
 <template>
-  <div>
-    <line-chart :chart-data="chartData" :chart-options="options" />
-  </div>
+  <Line :chart-data="chartData" :chart-options="options" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { Line } from 'vue-chart-3'
-import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables)
+import { Line } from 'vue-chartjs'
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+} from 'chart.js'
 
-const labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-const values = [1800, 2000, 2100, 1950, 2300, 1750, 2050]
-const chartData = ref({ labels, datasets: [{ label: 'Calories', data: values, fill: true, tension: 0.4, backgroundColor: 'rgba(255,90,31,0.12)', borderColor: '#ff5a1f', pointBackgroundColor: '#ff8a4c' }] })
-const options = { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: false } } }
+// Register Chart.js components
+ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
+
+const chartData = {
+  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  datasets: [
+    {
+      label: 'Calories',
+      data: [1800, 2000, 2100, 1950, 2300, 1750, 2050],
+      fill: true,
+      borderColor: '#ff5a1f',
+      backgroundColor: 'rgba(255,90,31,0.12)',
+      pointBackgroundColor: '#ff8a4c',
+    },
+  ],
+}
+
+const options = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: { y: { beginAtZero: false } },
+}
 </script>
