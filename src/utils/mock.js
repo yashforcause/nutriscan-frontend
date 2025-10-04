@@ -1,0 +1,1 @@
+export function mockAnalyze() { return { totalCalories: 540, items: [ { name: 'Grilled Chicken', confidence: 0.92, calories: 320, emoji: '🍗' }, { name: 'Salad (mixed)', confidence: 0.79, calories: 120, emoji: '🥗' }, { name: 'Dressing', confidence: 0.55, calories: 100, emoji: '🥣' } ] } }
