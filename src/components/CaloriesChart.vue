@@ -1,5 +1,8 @@
 <template>
-  <Line :chart-data="chartData" :chart-options="options" />
+  <div v-motion="motionVariants" class="p-4 bg-white rounded-lg shadow-md">
+    <h2 class="text-xl font-bold text-brand-500 mb-4">Weekly Calories</h2>
+    <Line :chart-data="chartData" :chart-options="options" />
+  </div>
 </template>
 
 <script setup>
@@ -14,10 +17,12 @@ import {
   LinearScale,
   PointElement,
 } from 'chart.js'
+import { useMotionVariants } from '@vueuse/motion'
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 
+// Dummy data
 const chartData = {
   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
   datasets: [
@@ -32,9 +37,16 @@ const chartData = {
   ],
 }
 
+// Chart options
 const options = {
   responsive: true,
   plugins: { legend: { display: false } },
   scales: { y: { beginAtZero: false } },
 }
+
+// Motion animation (v2)
+const motionVariants = useMotionVariants({
+  initial: { opacity: 0, y: 20 },
+  enter: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+})
 </script>
